@@ -8,6 +8,12 @@ Thumbs.db
 .env.production
 .idea/
 .vscode/
+
+# Local secrets / credentials — NEVER commit
+secrets.txt
+*.pem
+*.key
+*.ppk
 *.sw?
 *.suo
 *.ntvs*
