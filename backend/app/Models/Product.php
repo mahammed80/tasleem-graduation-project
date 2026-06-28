@@ -120,7 +120,7 @@ class Product extends Model
    
     public function scopeBoostedFirst($query)
     {
-        return $query->orderByRaw("CASE WHEN is_boosted=1 AND boost_expires_at>NOW() THEN 0 ELSE 1 END ASC");
+        return $query->orderByRaw("CASE WHEN is_boosted=1 AND boost_expires_at > CURRENT_TIMESTAMP THEN 0 ELSE 1 END ASC");
     }
 
     /**
