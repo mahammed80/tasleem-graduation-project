@@ -1,0 +1,50 @@
+# ── Grad-project safety nets (apply at every depth) ────────────
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.backup
+.env.*.local
+.env.production
+.idea/
+.vscode/
+*.sw?
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ── Python (ai-service) ────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
+*.egg-info/
+
+# ── Node (frontend & backend vite) ──────────────────────────────
+node_modules/
+dist/
+build/
+.cache/
+/public/build
+/public/hot
+/public/storage
+*.tsbuildinfo
+.npm
+.eslintcache
+
+# ── Laravel / PHP (backend) ────────────────────────────────────
+/vendor
+/storage/*.key
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/bootstrap/cache/*
+Homestead.json
+Homestead.yaml
+auth.json
+.phpunit.cache
+.phpunit.result.cache

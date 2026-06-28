@@ -1,0 +1,1194 @@
+{
+  "_readme": "Tasleem API — Mock / Seed Data. Every key matches the endpoint path. Use this with Laravel seeders, json-server, or MSW (Mock Service Worker). All prices in EGP. Paginated lists use Laravel's standard pagination envelope.",
+
+  "meta": {
+    "base_url": "http://127.0.0.1:8000/api/v1",
+    "auth_header": "Authorization: Bearer {token}",
+    "pagination_envelope": {
+      "data": [],
+      "current_page": 1,
+      "last_page": 3,
+      "per_page": 15,
+      "total": 42,
+      "from": 1,
+      "to": 15,
+      "links": { "first": "...", "last": "...", "prev": null, "next": "..." }
+    }
+  },
+
+  "auth": {
+    "POST /register": {
+      "request": {
+        "name": "Ahmed Mohamed",
+        "email": "ahmed@example.com",
+        "phone": "01012345678",
+        "password": "Secret123!",
+        "password_confirmation": "Secret123!"
+      },
+      "response": {
+        "user": {
+          "id": 1,
+          "name": "Ahmed Mohamed",
+          "email": "ahmed@example.com",
+          "phone": "01012345678",
+          "role": "user",
+          "email_verified_at": null,
+          "city": null,
+          "address": null,
+          "created_at": "2025-01-15T10:00:00.000000Z",
+          "updated_at": "2025-01-15T10:00:00.000000Z"
+        },
+        "token": "1|xYzAbCdEfGhIjKlMnOpQrStUvWxYz1234567890"
+      }
+    },
+    "POST /login": {
+      "request": {
+        "email": "ahmed@example.com",
+        "password": "Secret123!"
+      },
+      "response": {
+        "user": {
+          "id": 1,
+          "name": "Ahmed Mohamed",
+          "email": "ahmed@example.com",
+          "phone": "01012345678",
+          "role": "user",
+          "email_verified_at": "2025-01-16T08:00:00.000000Z",
+          "city": "Cairo",
+          "address": "5 Tahrir Square, Downtown",
+          "created_at": "2025-01-15T10:00:00.000000Z",
+          "updated_at": "2025-01-20T14:30:00.000000Z"
+        },
+        "token": "2|aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpP9876543210"
+      }
+    },
+    "POST /logout": {
+      "request": {},
+      "response": { "message": "Logged out successfully" }
+    },
+    "GET /me": {
+      "response": {
+        "user": {
+          "id": 1,
+          "name": "Ahmed Mohamed",
+          "email": "ahmed@example.com",
+          "phone": "01012345678",
+          "role": "user",
+          "email_verified_at": "2025-01-16T08:00:00.000000Z",
+          "city": "Cairo",
+          "address": "5 Tahrir Square, Downtown",
+          "created_at": "2025-01-15T10:00:00.000000Z",
+          "updated_at": "2025-01-20T14:30:00.000000Z"
+        }
+      }
+    },
+    "POST /forgot-password": {
+      "request": { "email": "ahmed@example.com" },
+      "response": { "message": "Password reset link sent to your email." }
+    },
+    "POST /reset-password": {
+      "request": {
+        "token": "abc123resettoken",
+        "email": "ahmed@example.com",
+        "password": "NewSecret456!",
+        "password_confirmation": "NewSecret456!"
+      },
+      "response": {
+        "message": "Password reset successfully.",
+        "user": { "id": 1, "name": "Ahmed Mohamed", "email": "ahmed@example.com" },
+        "token": "3|newTokenAfterReset123456"
+      }
+    },
+    "GET /verify-email/{id}/{hash}": {
+      "response": { "message": "Email verified successfully." }
+    },
+    "POST /email/verification-notification": {
+      "response": { "message": "Verification link resent." }
+    }
+  },
+
+  "users": {
+    "GET /users": {
+      "response": {
+        "data": [
+          {
+            "id": 1,
+            "name": "Ahmed Mohamed",
+            "email": "ahmed@example.com",
+            "phone": "01012345678",
+            "role": "user",
+            "city": "Cairo",
+            "email_verified_at": "2025-01-16T08:00:00.000000Z",
+            "created_at": "2025-01-15T10:00:00.000000Z",
+            "updated_at": "2025-01-20T14:30:00.000000Z"
+          },
+          {
+            "id": 2,
+            "name": "Nour El-Sayed",
+            "email": "nour@example.com",
+            "phone": "01156789012",
+            "role": "seller",
+            "city": "Alexandria",
+            "email_verified_at": "2025-01-10T09:00:00.000000Z",
+            "created_at": "2025-01-09T11:00:00.000000Z",
+            "updated_at": "2025-01-22T08:15:00.000000Z"
+          },
+          {
+            "id": 3,
+            "name": "Omar Hassan",
+            "email": "omar@example.com",
+            "phone": "01234567890",
+            "role": "admin",
+            "city": "Giza",
+            "email_verified_at": "2025-01-01T00:00:00.000000Z",
+            "created_at": "2025-01-01T00:00:00.000000Z",
+            "updated_at": "2025-01-25T10:00:00.000000Z"
+          },
+          {
+            "id": 4,
+            "name": "Sara Khaled",
+            "email": "sara@example.com",
+            "phone": "01098765432",
+            "role": "user",
+            "city": "Mansoura",
+            "email_verified_at": null,
+            "created_at": "2025-02-01T14:00:00.000000Z",
+            "updated_at": "2025-02-01T14:00:00.000000Z"
+          },
+          {
+            "id": 5,
+            "name": "Karim Farouk",
+            "email": "karim@example.com",
+            "phone": "01512345678",
+            "role": "seller",
+            "city": "Cairo",
+            "email_verified_at": "2025-02-05T10:30:00.000000Z",
+            "created_at": "2025-02-04T09:00:00.000000Z",
+            "updated_at": "2025-02-10T16:45:00.000000Z"
+          },
+          {
+            "id": 6,
+            "name": "Layla Mostafa",
+            "email": "layla@example.com",
+            "phone": "01612345678",
+            "role": "user",
+            "city": "Luxor",
+            "email_verified_at": "2025-02-12T08:00:00.000000Z",
+            "created_at": "2025-02-11T13:00:00.000000Z",
+            "updated_at": "2025-02-15T09:20:00.000000Z"
+          },
+          {
+            "id": 7,
+            "name": "Youssef Ibrahim",
+            "email": "youssef@example.com",
+            "phone": "01712345678",
+            "role": "user",
+            "city": "Aswan",
+            "email_verified_at": "2025-03-01T10:00:00.000000Z",
+            "created_at": "2025-03-01T09:00:00.000000Z",
+            "updated_at": "2025-03-05T11:00:00.000000Z"
+          }
+        ],
+        "current_page": 1,
+        "last_page": 1,
+        "per_page": 15,
+        "total": 7
+      }
+    },
+    "GET /users/{id}": {
+      "response": {
+        "id": 1,
+        "name": "Ahmed Mohamed",
+        "email": "ahmed@example.com",
+        "phone": "01012345678",
+        "role": "user",
+        "city": "Cairo",
+        "address": "5 Tahrir Square, Downtown",
+        "email_verified_at": "2025-01-16T08:00:00.000000Z",
+        "created_at": "2025-01-15T10:00:00.000000Z",
+        "updated_at": "2025-01-20T14:30:00.000000Z"
+      }
+    },
+    "POST /users": {
+      "request": {
+        "name": "New User",
+        "email": "newuser@example.com",
+        "phone": "01012300000",
+        "role": "user",
+        "password": "Password123!",
+        "password_confirmation": "Password123!"
+      },
+      "response": {
+        "message": "User created successfully.",
+        "user": { "id": 8, "name": "New User", "email": "newuser@example.com", "role": "user" }
+      }
+    },
+    "PUT /users/{id}": {
+      "request": {
+        "name": "Ahmed Mohamed Updated",
+        "email": "ahmed@example.com",
+        "phone": "01012345678",
+        "city": "Cairo",
+        "address": "10 New Cairo, 5th Settlement",
+        "role": "seller"
+      },
+      "response": {
+        "message": "User updated successfully.",
+        "user": { "id": 1, "name": "Ahmed Mohamed Updated", "email": "ahmed@example.com", "role": "seller" }
+      }
+    },
+    "DELETE /users/{id}": {
+      "response": { "message": "User deleted successfully." }
+    },
+    "GET /users/{id}/products": {
+      "response": {
+        "data": [
+          { "id": 1, "name": "iPhone 14 Pro Max", "price": 45000, "stock": 3, "is_rentable": false, "category": { "id": 1, "name": "Electronics" }, "image": "https://picsum.photos/seed/iphone14/400/400" },
+          { "id": 3, "name": "Sony WH-1000XM5", "price": 9500, "stock": 10, "is_rentable": true, "daily_rental_price": 200, "category": { "id": 1, "name": "Electronics" }, "image": "https://picsum.photos/seed/sony-wh/400/400" }
+        ],
+        "total": 2
+      }
+    },
+    "GET /users/{id}/orders": {
+      "response": {
+        "data": [
+          { "id": 101, "total": 45000, "status": "completed", "created_at": "2025-01-20T10:00:00.000000Z" },
+          { "id": 102, "total": 9500, "status": "pending", "created_at": "2025-02-05T14:00:00.000000Z" }
+        ],
+        "total": 2
+      }
+    },
+    "GET /users/{id}/rentals": {
+      "response": {
+        "data": [
+          { "id": 11, "product": { "id": 3, "name": "Sony WH-1000XM5" }, "start_date": "2025-02-10", "end_date": "2025-02-17", "total_price": 1400, "status": "returned" }
+        ],
+        "total": 1
+      }
+    }
+  },
+
+  "categories": {
+    "GET /categories": {
+      "response": {
+        "data": [
+          { "id": 1, "name": "Electronics",   "slug": "electronics",   "icon": "bi bi-cpu",          "products_count": 42, "image": "https://picsum.photos/seed/electronics/400/300",   "created_at": "2025-01-01T00:00:00.000000Z" },
+          { "id": 2, "name": "Furniture",     "slug": "furniture",     "icon": "bi bi-lamp",         "products_count": 18, "image": "https://picsum.photos/seed/furniture/400/300",     "created_at": "2025-01-01T00:00:00.000000Z" },
+          { "id": 3, "name": "Vehicles",      "slug": "vehicles",      "icon": "bi bi-car-front",    "products_count": 9,  "image": "https://picsum.photos/seed/vehicles/400/300",      "created_at": "2025-01-01T00:00:00.000000Z" },
+          { "id": 4, "name": "Clothing",      "slug": "clothing",      "icon": "bi bi-bag",          "products_count": 55, "image": "https://picsum.photos/seed/clothing/400/300",      "created_at": "2025-01-01T00:00:00.000000Z" },
+          { "id": 5, "name": "Home & Garden", "slug": "home-garden",   "icon": "bi bi-house-heart",  "products_count": 30, "image": "https://picsum.photos/seed/home-garden/400/300",  "created_at": "2025-01-01T00:00:00.000000Z" },
+          { "id": 6, "name": "Sports",        "slug": "sports",        "icon": "bi bi-bicycle",      "products_count": 24, "image": "https://picsum.photos/seed/sports/400/300",        "created_at": "2025-01-01T00:00:00.000000Z" },
+          { "id": 7, "name": "Books",         "slug": "books",         "icon": "bi bi-book",         "products_count": 61, "image": "https://picsum.photos/seed/books/400/300",         "created_at": "2025-01-01T00:00:00.000000Z" },
+          { "id": 8, "name": "Cameras",       "slug": "cameras",       "icon": "bi bi-camera",       "products_count": 15, "image": "https://picsum.photos/seed/cameras/400/300",       "created_at": "2025-01-01T00:00:00.000000Z" }
+        ]
+      }
+    },
+    "GET /categories/{id}": {
+      "response": {
+        "id": 1, "name": "Electronics", "slug": "electronics", "icon": "bi bi-cpu",
+        "products_count": 42, "image": "https://picsum.photos/seed/electronics/400/300",
+        "created_at": "2025-01-01T00:00:00.000000Z"
+      }
+    },
+    "POST /categories": {
+      "request": { "name": "Gaming", "icon": "bi bi-controller" },
+      "response": { "id": 9, "name": "Gaming", "slug": "gaming", "icon": "bi bi-controller", "products_count": 0 }
+    },
+    "PUT /categories/{id}": {
+      "request": { "name": "Electronics & Gadgets", "icon": "bi bi-cpu-fill" },
+      "response": { "id": 1, "name": "Electronics & Gadgets", "slug": "electronics-gadgets" }
+    },
+    "DELETE /categories/{id}": {
+      "response": { "message": "Category deleted successfully." }
+    }
+  },
+
+  "products": {
+    "GET /products": {
+      "query_params": {
+        "search": "iphone",
+        "category_id": 1,
+        "min_price": 1000,
+        "max_price": 50000,
+        "is_rentable": 1,
+        "sort": "price_asc",
+        "page": 1,
+        "per_page": 12
+      },
+      "response": {
+        "data": [
+          {
+            "id": 1,
+            "name": "iPhone 14 Pro Max 256GB",
+            "description": "Brand new, sealed in box. Space Black color. Includes all original accessories. 1-year warranty.",
+            "price": 45000,
+            "old_price": 52000,
+            "stock": 3,
+            "condition": "new",
+            "is_rentable": false,
+            "daily_rental_price": null,
+            "views_count": 248,
+            "rating": 4.8,
+            "reviews_count": 12,
+            "image": "https://picsum.photos/seed/iphone14/600/600",
+            "category_id": 1,
+            "category": { "id": 1, "name": "Electronics" },
+            "user_id": 2,
+            "seller": { "id": 2, "name": "Nour El-Sayed" },
+            "created_at": "2025-01-18T09:00:00.000000Z",
+            "updated_at": "2025-01-25T12:00:00.000000Z"
+          },
+          {
+            "id": 2,
+            "name": "Samsung Galaxy S24 Ultra",
+            "description": "Like new, used for 2 months. Titanium Gray. 512GB. No scratches. Original box included.",
+            "price": 38000,
+            "old_price": null,
+            "stock": 1,
+            "condition": "like_new",
+            "is_rentable": false,
+            "daily_rental_price": null,
+            "views_count": 187,
+            "rating": 4.6,
+            "reviews_count": 7,
+            "image": "https://picsum.photos/seed/samsung-s24/600/600",
+            "category_id": 1,
+            "category": { "id": 1, "name": "Electronics" },
+            "user_id": 5,
+            "seller": { "id": 5, "name": "Karim Farouk" },
+            "created_at": "2025-01-22T11:00:00.000000Z",
+            "updated_at": "2025-02-01T08:00:00.000000Z"
+          },
+          {
+            "id": 3,
+            "name": "Sony WH-1000XM5 Headphones",
+            "description": "Premium noise-cancelling headphones. Black. Perfect for work from home or travel. Includes carry case.",
+            "price": 9500,
+            "old_price": 12000,
+            "stock": 10,
+            "condition": "new",
+            "is_rentable": true,
+            "daily_rental_price": 200,
+            "views_count": 95,
+            "rating": 4.9,
+            "reviews_count": 23,
+            "image": "https://picsum.photos/seed/sony-wh/600/600",
+            "category_id": 1,
+            "category": { "id": 1, "name": "Electronics" },
+            "user_id": 2,
+            "seller": { "id": 2, "name": "Nour El-Sayed" },
+            "created_at": "2025-01-30T10:00:00.000000Z",
+            "updated_at": "2025-02-10T09:30:00.000000Z"
+          },
+          {
+            "id": 4,
+            "name": "Macbook Pro 14\" M3 Pro",
+            "description": "Space Gray, 18GB RAM, 512GB SSD. AppleCare+ until 2027. Includes original charger and box. Excellent condition.",
+            "price": 85000,
+            "old_price": 99000,
+            "stock": 2,
+            "condition": "like_new",
+            "is_rentable": true,
+            "daily_rental_price": 1500,
+            "views_count": 312,
+            "rating": 5.0,
+            "reviews_count": 4,
+            "image": "https://picsum.photos/seed/macbook-pro/600/600",
+            "category_id": 1,
+            "category": { "id": 1, "name": "Electronics" },
+            "user_id": 5,
+            "seller": { "id": 5, "name": "Karim Farouk" },
+            "created_at": "2025-02-05T14:00:00.000000Z",
+            "updated_at": "2025-02-15T10:00:00.000000Z"
+          },
+          {
+            "id": 5,
+            "name": "IKEA MALM Bed Frame Queen",
+            "description": "White birch, queen size. Assembled once, excellent condition. Includes storage drawers. Self-pickup or delivery available.",
+            "price": 4800,
+            "old_price": null,
+            "stock": 1,
+            "condition": "good",
+            "is_rentable": false,
+            "daily_rental_price": null,
+            "views_count": 64,
+            "rating": 4.2,
+            "reviews_count": 3,
+            "image": "https://picsum.photos/seed/ikea-bed/600/600",
+            "category_id": 2,
+            "category": { "id": 2, "name": "Furniture" },
+            "user_id": 2,
+            "seller": { "id": 2, "name": "Nour El-Sayed" },
+            "created_at": "2025-02-08T12:00:00.000000Z",
+            "updated_at": "2025-02-08T12:00:00.000000Z"
+          },
+          {
+            "id": 6,
+            "name": "Canon EOS R8 Mirrorless Camera",
+            "description": "Full-frame mirrorless, 24.2MP. Body only, no lens included. Shutter count: 1,200. Excellent optics and autofocus.",
+            "price": 28000,
+            "old_price": 34000,
+            "stock": 1,
+            "condition": "like_new",
+            "is_rentable": true,
+            "daily_rental_price": 750,
+            "views_count": 201,
+            "rating": 4.7,
+            "reviews_count": 9,
+            "image": "https://picsum.photos/seed/canon-r8/600/600",
+            "category_id": 8,
+            "category": { "id": 8, "name": "Cameras" },
+            "user_id": 5,
+            "seller": { "id": 5, "name": "Karim Farouk" },
+            "created_at": "2025-02-12T16:00:00.000000Z",
+            "updated_at": "2025-02-20T09:00:00.000000Z"
+          },
+          {
+            "id": 7,
+            "name": "PlayStation 5 Console",
+            "description": "Disc edition. Includes 2 controllers, 3 games (Spider-Man 2, FIFA 25, God of War). Box included.",
+            "price": 32000,
+            "old_price": 38000,
+            "stock": 5,
+            "condition": "like_new",
+            "is_rentable": true,
+            "daily_rental_price": 500,
+            "views_count": 423,
+            "rating": 4.9,
+            "reviews_count": 31,
+            "image": "https://picsum.photos/seed/ps5/600/600",
+            "category_id": 1,
+            "category": { "id": 1, "name": "Electronics" },
+            "user_id": 2,
+            "seller": { "id": 2, "name": "Nour El-Sayed" },
+            "created_at": "2025-02-18T10:00:00.000000Z",
+            "updated_at": "2025-03-01T14:00:00.000000Z"
+          },
+          {
+            "id": 8,
+            "name": "Hyundai Elantra 2022",
+            "description": "White, 45,000 km, automatic. Very clean car. First owner. All documents valid until 2027.",
+            "price": 420000,
+            "old_price": null,
+            "stock": 1,
+            "condition": "good",
+            "is_rentable": true,
+            "daily_rental_price": 2500,
+            "views_count": 789,
+            "rating": 4.5,
+            "reviews_count": 2,
+            "image": "https://picsum.photos/seed/elantra/600/600",
+            "category_id": 3,
+            "category": { "id": 3, "name": "Vehicles" },
+            "user_id": 5,
+            "seller": { "id": 5, "name": "Karim Farouk" },
+            "created_at": "2025-03-01T08:00:00.000000Z",
+            "updated_at": "2025-03-05T10:00:00.000000Z"
+          },
+          {
+            "id": 9,
+            "name": "Nike Air Max 270 React",
+            "description": "Size 43 EU. Worn twice, essentially new. Original box. White/Black colorway. Retail 3,200 EGP.",
+            "price": 2000,
+            "old_price": 3200,
+            "stock": 1,
+            "condition": "like_new",
+            "is_rentable": false,
+            "daily_rental_price": null,
+            "views_count": 55,
+            "rating": 4.3,
+            "reviews_count": 1,
+            "image": "https://picsum.photos/seed/nike-am/600/600",
+            "category_id": 4,
+            "category": { "id": 4, "name": "Clothing" },
+            "user_id": 2,
+            "seller": { "id": 2, "name": "Nour El-Sayed" },
+            "created_at": "2025-03-03T12:00:00.000000Z",
+            "updated_at": "2025-03-03T12:00:00.000000Z"
+          },
+          {
+            "id": 10,
+            "name": "DJI Mini 4 Pro Drone",
+            "description": "4K/60fps, 3-axis gimbal, 34-min flight time. Fly More Combo. Includes 3 batteries, ND filters, bag.",
+            "price": 22000,
+            "old_price": 27000,
+            "stock": 2,
+            "condition": "like_new",
+            "is_rentable": true,
+            "daily_rental_price": 600,
+            "views_count": 340,
+            "rating": 4.8,
+            "reviews_count": 14,
+            "image": "https://picsum.photos/seed/dji-mini4/600/600",
+            "category_id": 8,
+            "category": { "id": 8, "name": "Cameras" },
+            "user_id": 5,
+            "seller": { "id": 5, "name": "Karim Farouk" },
+            "created_at": "2025-03-05T09:00:00.000000Z",
+            "updated_at": "2025-03-08T11:00:00.000000Z"
+          },
+          {
+            "id": 11,
+            "name": "Whirlpool 7kg Washing Machine",
+            "description": "Front-load, white, A++ energy rating. 1400 RPM. Works perfectly. Moving sale.",
+            "price": 8500,
+            "old_price": 12000,
+            "stock": 1,
+            "condition": "good",
+            "is_rentable": false,
+            "daily_rental_price": null,
+            "views_count": 88,
+            "rating": 4.1,
+            "reviews_count": 5,
+            "image": "https://picsum.photos/seed/washing-m/600/600",
+            "category_id": 5,
+            "category": { "id": 5, "name": "Home & Garden" },
+            "user_id": 2,
+            "seller": { "id": 2, "name": "Nour El-Sayed" },
+            "created_at": "2025-03-06T10:00:00.000000Z",
+            "updated_at": "2025-03-06T10:00:00.000000Z"
+          },
+          {
+            "id": 12,
+            "name": "Vintage Ottoman Sofa Set",
+            "description": "3-piece set: 3-seater + 2 armchairs. Royal blue velvet. Hand-carved wooden legs. Excellent condition.",
+            "price": 18000,
+            "old_price": null,
+            "stock": 1,
+            "condition": "good",
+            "is_rentable": false,
+            "daily_rental_price": null,
+            "views_count": 112,
+            "rating": 4.6,
+            "reviews_count": 8,
+            "image": "https://picsum.photos/seed/sofa-set/600/600",
+            "category_id": 2,
+            "category": { "id": 2, "name": "Furniture" },
+            "user_id": 5,
+            "seller": { "id": 5, "name": "Karim Farouk" },
+            "created_at": "2025-03-07T14:00:00.000000Z",
+            "updated_at": "2025-03-07T14:00:00.000000Z"
+          }
+        ],
+        "current_page": 1,
+        "last_page": 3,
+        "per_page": 12,
+        "total": 35
+      }
+    },
+    "GET /products/{id}": {
+      "response": {
+        "id": 1,
+        "name": "iPhone 14 Pro Max 256GB",
+        "description": "Brand new, sealed in box. Space Black color. Includes all original accessories. 1-year warranty. Imported from Dubai. Serial number verifiable.",
+        "price": 45000,
+        "old_price": 52000,
+        "stock": 3,
+        "condition": "new",
+        "is_rentable": false,
+        "daily_rental_price": null,
+        "views_count": 249,
+        "rating": 4.8,
+        "reviews_count": 12,
+        "image": "https://picsum.photos/seed/iphone14/600/600",
+        "images": [
+          { "id": 1, "url": "https://picsum.photos/seed/iphone14a/800/600", "alt": "Front view" },
+          { "id": 2, "url": "https://picsum.photos/seed/iphone14b/800/600", "alt": "Back view" },
+          { "id": 3, "url": "https://picsum.photos/seed/iphone14c/800/600", "alt": "Box contents" }
+        ],
+        "category_id": 1,
+        "category": { "id": 1, "name": "Electronics" },
+        "user_id": 2,
+        "seller": { "id": 2, "name": "Nour El-Sayed", "city": "Alexandria", "rating": 4.7 },
+        "reviews": [
+          { "id": 1, "user": { "id": 1, "name": "Ahmed M." }, "rating": 5, "comment": "Exactly as described. Very fast shipping. Highly recommended seller!", "created_at": "2025-01-25T14:00:00.000000Z" },
+          { "id": 2, "user": { "id": 4, "name": "Sara K." }, "rating": 4, "comment": "Phone is great, sealed box as promised. Minor delay in delivery but seller was responsive.", "created_at": "2025-02-01T10:00:00.000000Z" }
+        ],
+        "created_at": "2025-01-18T09:00:00.000000Z",
+        "updated_at": "2025-01-25T12:00:00.000000Z"
+      }
+    },
+    "POST /products": {
+      "request": {
+        "name": "New Product Name",
+        "description": "Detailed description here...",
+        "price": 5000,
+        "old_price": 6000,
+        "stock": 5,
+        "category_id": 1,
+        "condition": "new",
+        "is_rentable": 1,
+        "daily_rental_price": 150,
+        "images[]": ["(file)", "(file)"]
+      },
+      "response": {
+        "message": "Product created successfully.",
+        "data": { "id": 13, "name": "New Product Name", "price": 5000, "slug": "new-product-name" }
+      }
+    },
+    "PUT /products/{id}": {
+      "request": {
+        "_method": "PUT",
+        "name": "Updated Product Name",
+        "price": 4800,
+        "stock": 4
+      },
+      "response": {
+        "message": "Product updated successfully.",
+        "data": { "id": 1, "name": "Updated Product Name", "price": 4800 }
+      }
+    },
+    "DELETE /products/{id}": {
+      "response": { "message": "Product deleted successfully." }
+    }
+  },
+
+  "product_images": {
+    "GET /products/{id}/images": {
+      "response": {
+        "data": [
+          { "id": 1, "product_id": 1, "url": "https://picsum.photos/seed/iphone14a/800/600", "alt": "Front view", "order": 1, "created_at": "2025-01-18T09:05:00.000000Z" },
+          { "id": 2, "product_id": 1, "url": "https://picsum.photos/seed/iphone14b/800/600", "alt": "Back view", "order": 2, "created_at": "2025-01-18T09:05:00.000000Z" },
+          { "id": 3, "product_id": 1, "url": "https://picsum.photos/seed/iphone14c/800/600", "alt": "Box contents", "order": 3, "created_at": "2025-01-18T09:05:00.000000Z" }
+        ]
+      }
+    },
+    "GET /products/{id}/images/{imageId}": {
+      "response": { "id": 1, "product_id": 1, "url": "https://picsum.photos/seed/iphone14a/800/600", "alt": "Front view", "order": 1 }
+    },
+    "POST /products/{id}/images": {
+      "request": { "images[]": ["(file1)", "(file2)"] },
+      "response": {
+        "message": "Images uploaded successfully.",
+        "data": [
+          { "id": 4, "product_id": 1, "url": "https://picsum.photos/seed/iphone14d/800/600", "alt": null, "order": 4 }
+        ]
+      }
+    },
+    "POST /products/{id}/images/single": {
+      "request": { "image": "(file)" },
+      "response": { "id": 5, "product_id": 1, "url": "https://picsum.photos/seed/iphone14e/800/600", "alt": null }
+    },
+    "PUT /products/{id}/images/{imageId}": {
+      "request": { "alt": "Updated alt text description" },
+      "response": { "id": 1, "product_id": 1, "alt": "Updated alt text description" }
+    },
+    "DELETE /products/{id}/images/{imageId}": {
+      "response": { "message": "Image deleted successfully." }
+    },
+    "DELETE /products/{id}/images (bulk)": {
+      "request": { "image_ids": [2, 3] },
+      "response": { "message": "2 images deleted successfully." }
+    }
+  },
+
+  "orders": {
+    "GET /orders": {
+      "response": {
+        "data": [
+          {
+            "id": 101,
+            "user_id": 1,
+            "status": "completed",
+            "subtotal": 45000,
+            "shipping_cost": 50,
+            "total": 45050,
+            "shipping_address": "5 Tahrir Square, Downtown, Cairo, 11511",
+            "payment_method": "card",
+            "items": [
+              { "id": 201, "product_id": 1, "name": "iPhone 14 Pro Max 256GB", "quantity": 1, "price": 45000, "image": "https://picsum.photos/seed/iphone14/600/600" }
+            ],
+            "created_at": "2025-01-20T10:00:00.000000Z",
+            "updated_at": "2025-01-22T16:00:00.000000Z"
+          },
+          {
+            "id": 102,
+            "user_id": 1,
+            "status": "processing",
+            "subtotal": 9500,
+            "shipping_cost": 50,
+            "total": 9550,
+            "shipping_address": "5 Tahrir Square, Downtown, Cairo, 11511",
+            "payment_method": "cash",
+            "items": [
+              { "id": 202, "product_id": 3, "name": "Sony WH-1000XM5 Headphones", "quantity": 1, "price": 9500, "image": "https://picsum.photos/seed/sony-wh/600/600" }
+            ],
+            "created_at": "2025-02-05T14:00:00.000000Z",
+            "updated_at": "2025-02-06T09:00:00.000000Z"
+          },
+          {
+            "id": 103,
+            "user_id": 1,
+            "status": "pending",
+            "subtotal": 2000,
+            "shipping_cost": 50,
+            "total": 2050,
+            "shipping_address": "5 Tahrir Square, Downtown, Cairo, 11511",
+            "payment_method": "vodafone_cash",
+            "items": [
+              { "id": 203, "product_id": 9, "name": "Nike Air Max 270 React", "quantity": 1, "price": 2000, "image": "https://picsum.photos/seed/nike-am/600/600" }
+            ],
+            "created_at": "2025-03-08T11:00:00.000000Z",
+            "updated_at": "2025-03-08T11:00:00.000000Z"
+          },
+          {
+            "id": 104,
+            "user_id": 1,
+            "status": "cancelled",
+            "subtotal": 38000,
+            "shipping_cost": 50,
+            "total": 38050,
+            "shipping_address": "5 Tahrir Square, Downtown, Cairo, 11511",
+            "payment_method": "instapay",
+            "items": [
+              { "id": 204, "product_id": 2, "name": "Samsung Galaxy S24 Ultra", "quantity": 1, "price": 38000, "image": "https://picsum.photos/seed/samsung-s24/600/600" }
+            ],
+            "created_at": "2025-02-20T09:00:00.000000Z",
+            "updated_at": "2025-02-21T10:00:00.000000Z"
+          }
+        ],
+        "current_page": 1,
+        "last_page": 1,
+        "per_page": 15,
+        "total": 4
+      }
+    },
+    "GET /orders/{id}": {
+      "response": {
+        "id": 101,
+        "user_id": 1,
+        "status": "completed",
+        "subtotal": 45000,
+        "shipping_cost": 50,
+        "total": 45050,
+        "shipping_address": "5 Tahrir Square, Downtown, Cairo, 11511",
+        "payment_method": "card",
+        "items": [
+          { "id": 201, "product_id": 1, "product": { "id": 1, "name": "iPhone 14 Pro Max 256GB", "image": "https://picsum.photos/seed/iphone14/600/600" }, "quantity": 1, "price": 45000 }
+        ],
+        "created_at": "2025-01-20T10:00:00.000000Z",
+        "updated_at": "2025-01-22T16:00:00.000000Z"
+      }
+    },
+    "POST /orders": {
+      "request": {
+        "shipping_address": "5 Tahrir Square, Downtown, Cairo",
+        "payment_method": "card",
+        "items": [
+          { "product_id": 1, "quantity": 1 }
+        ]
+      },
+      "response": {
+        "message": "Order placed successfully.",
+        "data": { "id": 105, "status": "pending", "total": 45050 }
+      }
+    },
+    "PUT /orders/{id}": {
+      "request": { "status": "cancelled" },
+      "response": { "message": "Order updated.", "data": { "id": 101, "status": "cancelled" } }
+    },
+    "DELETE /orders/{id}": {
+      "response": { "message": "Order deleted successfully." }
+    }
+  },
+
+  "rentals": {
+    "GET /rentals": {
+      "response": {
+        "data": [
+          {
+            "id": 11,
+            "user_id": 1,
+            "product_id": 3,
+            "product": { "id": 3, "name": "Sony WH-1000XM5 Headphones", "image": "https://picsum.photos/seed/sony-wh/600/600" },
+            "start_date": "2025-02-10",
+            "end_date": "2025-02-17",
+            "total_price": 1400,
+            "status": "returned",
+            "created_at": "2025-02-08T14:00:00.000000Z",
+            "updated_at": "2025-02-17T18:00:00.000000Z"
+          },
+          {
+            "id": 12,
+            "user_id": 1,
+            "product_id": 7,
+            "product": { "id": 7, "name": "PlayStation 5 Console", "image": "https://picsum.photos/seed/ps5/600/600" },
+            "start_date": "2025-03-05",
+            "end_date": "2025-03-12",
+            "total_price": 3500,
+            "status": "active",
+            "created_at": "2025-03-03T10:00:00.000000Z",
+            "updated_at": "2025-03-05T09:00:00.000000Z"
+          },
+          {
+            "id": 13,
+            "user_id": 1,
+            "product_id": 6,
+            "product": { "id": 6, "name": "Canon EOS R8 Mirrorless Camera", "image": "https://picsum.photos/seed/canon-r8/600/600" },
+            "start_date": "2025-02-25",
+            "end_date": "2025-03-04",
+            "total_price": 5250,
+            "status": "overdue",
+            "created_at": "2025-02-23T11:00:00.000000Z",
+            "updated_at": "2025-03-04T09:00:00.000000Z"
+          }
+        ],
+        "current_page": 1,
+        "last_page": 1,
+        "per_page": 15,
+        "total": 3
+      }
+    },
+    "GET /rentals/{id}": {
+      "response": {
+        "id": 12,
+        "user_id": 1,
+        "product_id": 7,
+        "product": { "id": 7, "name": "PlayStation 5 Console", "image": "https://picsum.photos/seed/ps5/600/600" },
+        "start_date": "2025-03-05",
+        "end_date": "2025-03-12",
+        "total_price": 3500,
+        "status": "active",
+        "created_at": "2025-03-03T10:00:00.000000Z",
+        "updated_at": "2025-03-05T09:00:00.000000Z"
+      }
+    },
+    "POST /rentals": {
+      "request": { "product_id": 7, "start_date": "2025-03-15", "end_date": "2025-03-20" },
+      "response": {
+        "message": "Rental created successfully.",
+        "data": { "id": 14, "product_id": 7, "start_date": "2025-03-15", "end_date": "2025-03-20", "total_price": 2500, "status": "pending" }
+      }
+    },
+    "PUT /rentals/{id} (return)": {
+      "request": { "status": "returned" },
+      "response": { "message": "Rental marked as returned.", "data": { "id": 12, "status": "returned" } }
+    },
+    "DELETE /rentals/{id}": {
+      "response": { "message": "Rental deleted successfully." }
+    }
+  },
+
+  "reviews": {
+    "GET /reviews": {
+      "query_params": { "product_id": 1, "user_id": 1 },
+      "response": {
+        "data": [
+          {
+            "id": 1,
+            "product_id": 1,
+            "user_id": 1,
+            "user": { "id": 1, "name": "Ahmed Mohamed" },
+            "rating": 5,
+            "comment": "Exactly as described. Very fast shipping. Highly recommended seller!",
+            "created_at": "2025-01-25T14:00:00.000000Z",
+            "updated_at": "2025-01-25T14:00:00.000000Z"
+          },
+          {
+            "id": 2,
+            "product_id": 1,
+            "user_id": 4,
+            "user": { "id": 4, "name": "Sara Khaled" },
+            "rating": 4,
+            "comment": "Phone is great, sealed box as promised. Minor delay in delivery.",
+            "created_at": "2025-02-01T10:00:00.000000Z",
+            "updated_at": "2025-02-01T10:00:00.000000Z"
+          }
+        ],
+        "current_page": 1,
+        "last_page": 1,
+        "per_page": 15,
+        "total": 2
+      }
+    },
+    "GET /reviews/{id}": {
+      "response": { "id": 1, "product_id": 1, "user_id": 1, "rating": 5, "comment": "Excellent product!" }
+    },
+    "POST /reviews": {
+      "request": { "product_id": 1, "rating": 5, "comment": "Amazing product, exactly as described!" },
+      "response": {
+        "message": "Review submitted successfully.",
+        "data": { "id": 3, "product_id": 1, "user_id": 1, "rating": 5, "comment": "Amazing product!" }
+      }
+    },
+    "PUT /reviews/{id}": {
+      "request": { "rating": 4, "comment": "Updated review comment." },
+      "response": { "id": 1, "rating": 4, "comment": "Updated review comment." }
+    },
+    "DELETE /reviews/{id}": {
+      "response": { "message": "Review deleted successfully." }
+    }
+  },
+
+  "payments": {
+    "GET /payments": {
+      "response": {
+        "data": [
+          {
+            "id": 301,
+            "order_id": 101,
+            "user_id": 1,
+            "amount": 45050,
+            "method": "card",
+            "status": "paid",
+            "transaction_id": "TXN-20250120-001",
+            "created_at": "2025-01-20T10:05:00.000000Z",
+            "updated_at": "2025-01-20T10:05:00.000000Z"
+          },
+          {
+            "id": 302,
+            "order_id": 102,
+            "user_id": 1,
+            "amount": 9550,
+            "method": "cash",
+            "status": "pending",
+            "transaction_id": null,
+            "created_at": "2025-02-05T14:05:00.000000Z",
+            "updated_at": "2025-02-05T14:05:00.000000Z"
+          },
+          {
+            "id": 303,
+            "order_id": 103,
+            "user_id": 1,
+            "amount": 2050,
+            "method": "vodafone_cash",
+            "status": "paid",
+            "transaction_id": "VC-20250308-1122",
+            "created_at": "2025-03-08T11:05:00.000000Z",
+            "updated_at": "2025-03-08T11:10:00.000000Z"
+          }
+        ],
+        "current_page": 1,
+        "last_page": 1,
+        "per_page": 15,
+        "total": 3
+      }
+    },
+    "GET /payments/{id}": {
+      "response": {
+        "id": 301, "order_id": 101, "user_id": 1,
+        "amount": 45050, "method": "card", "status": "paid",
+        "transaction_id": "TXN-20250120-001",
+        "created_at": "2025-01-20T10:05:00.000000Z"
+      }
+    },
+    "POST /payments": {
+      "request": { "order_id": 105, "method": "card", "amount": 45050 },
+      "response": {
+        "message": "Payment recorded successfully.",
+        "data": { "id": 304, "order_id": 105, "method": "card", "amount": 45050, "status": "paid" }
+      }
+    },
+    "PUT /payments/{id}": {
+      "request": { "status": "refunded" },
+      "response": { "id": 301, "status": "refunded" }
+    },
+    "DELETE /payments/{id}": {
+      "response": { "message": "Payment record deleted." }
+    }
+  },
+
+  "cart": {
+    "GET /cart": {
+      "response": {
+        "items": [
+          {
+            "id": 401,
+            "cart_id": 1,
+            "product_id": 7,
+            "product": {
+              "id": 7,
+              "name": "PlayStation 5 Console",
+              "price": 32000,
+              "stock": 5,
+              "image": "https://picsum.photos/seed/ps5/600/600"
+            },
+            "quantity": 1,
+            "price": 32000,
+            "type": "purchase"
+          },
+          {
+            "id": 402,
+            "cart_id": 1,
+            "product_id": 3,
+            "product": {
+              "id": 3,
+              "name": "Sony WH-1000XM5 Headphones",
+              "price": 9500,
+              "stock": 10,
+              "image": "https://picsum.photos/seed/sony-wh/600/600"
+            },
+            "quantity": 2,
+            "price": 19000,
+            "type": "purchase"
+          }
+        ],
+        "rental_items": [
+          {
+            "id": 403,
+            "cart_id": 1,
+            "product_id": 10,
+            "product": { "id": 10, "name": "DJI Mini 4 Pro Drone", "daily_rental_price": 600, "image": "https://picsum.photos/seed/dji-mini4/600/600" },
+            "start_date": "2025-03-15",
+            "end_date": "2025-03-18",
+            "days": 3,
+            "price": 1800,
+            "type": "rental"
+          }
+        ],
+        "subtotal": 52800,
+        "total": 52800
+      }
+    },
+    "POST /cart": {
+      "request": { "product_id": 1, "quantity": 1 },
+      "response": { "message": "Item added to cart.", "item": { "id": 404, "product_id": 1, "quantity": 1, "price": 45000 } }
+    },
+    "POST /cart/rentals": {
+      "request": { "product_id": 6, "start_date": "2025-03-20", "end_date": "2025-03-23" },
+      "response": { "message": "Rental item added to cart.", "item": { "id": 405, "product_id": 6, "start_date": "2025-03-20", "end_date": "2025-03-23", "days": 3, "price": 2250 } }
+    },
+    "PUT /cart/{id}": {
+      "request": { "quantity": 2 },
+      "response": { "message": "Cart updated.", "item": { "id": 401, "quantity": 2, "price": 64000 } }
+    },
+    "DELETE /cart/{id}": {
+      "response": { "message": "Item removed from cart." }
+    },
+    "DELETE /cart (clear)": {
+      "response": { "message": "Cart cleared." }
+    }
+  },
+
+  "wishlist": {
+    "GET /wishlist": {
+      "response": {
+        "data": [
+          {
+            "id": 501,
+            "user_id": 1,
+            "product_id": 4,
+            "product": {
+              "id": 4,
+              "name": "Macbook Pro 14\" M3 Pro",
+              "price": 85000,
+              "old_price": 99000,
+              "rating": 5.0,
+              "image": "https://picsum.photos/seed/macbook-pro/600/600",
+              "category": { "id": 1, "name": "Electronics" }
+            },
+            "created_at": "2025-02-10T10:00:00.000000Z"
+          },
+          {
+            "id": 502,
+            "user_id": 1,
+            "product_id": 8,
+            "product": {
+              "id": 8,
+              "name": "Hyundai Elantra 2022",
+              "price": 420000,
+              "rating": 4.5,
+              "image": "https://picsum.photos/seed/elantra/600/600",
+              "category": { "id": 3, "name": "Vehicles" }
+            },
+            "created_at": "2025-03-01T14:00:00.000000Z"
+          }
+        ],
+        "total": 2
+      }
+    },
+    "POST /wishlist": {
+      "request": { "product_id": 4 },
+      "response": { "message": "Added to wishlist.", "item": { "id": 503, "product_id": 4 } }
+    },
+    "GET /wishlist/check/{id}": {
+      "response": { "in_wishlist": true, "wishlist_item_id": 501 }
+    },
+    "DELETE /wishlist/{id}": {
+      "response": { "message": "Removed from wishlist." }
+    },
+    "DELETE /wishlist (clear)": {
+      "response": { "message": "Wishlist cleared." }
+    }
+  },
+
+  "recommendations": {
+    "GET /recommendations": {
+      "query_params": { "user_id": 1, "limit": 6 },
+      "response": {
+        "data": [
+          { "id": 601, "product_id": 10, "score": 0.97, "product": { "id": 10, "name": "DJI Mini 4 Pro Drone", "price": 22000, "rating": 4.8, "image": "https://picsum.photos/seed/dji-mini4/600/600" }, "reason": "Based on your interest in cameras" },
+          { "id": 602, "product_id": 7,  "score": 0.92, "product": { "id": 7,  "name": "PlayStation 5 Console", "price": 32000, "rating": 4.9, "image": "https://picsum.photos/seed/ps5/600/600" }, "reason": "Popular in Electronics" },
+          { "id": 603, "product_id": 4,  "score": 0.89, "product": { "id": 4,  "name": "Macbook Pro 14\" M3 Pro", "price": 85000, "rating": 5.0, "image": "https://picsum.photos/seed/macbook-pro/600/600" }, "reason": "Trending this week" },
+          { "id": 604, "product_id": 6,  "score": 0.85, "product": { "id": 6,  "name": "Canon EOS R8 Camera", "price": 28000, "rating": 4.7, "image": "https://picsum.photos/seed/canon-r8/600/600" }, "reason": "Similar to items you viewed" },
+          { "id": 605, "product_id": 3,  "score": 0.81, "product": { "id": 3,  "name": "Sony WH-1000XM5", "price": 9500, "rating": 4.9, "image": "https://picsum.photos/seed/sony-wh/600/600" }, "reason": "Top rated in Audio" },
+          { "id": 606, "product_id": 2,  "score": 0.76, "product": { "id": 2,  "name": "Samsung Galaxy S24 Ultra", "price": 38000, "rating": 4.6, "image": "https://picsum.photos/seed/samsung-s24/600/600" }, "reason": "Others also bought" }
+        ]
+      }
+    },
+    "GET /recommendations/{id}": {
+      "response": { "id": 601, "product_id": 10, "score": 0.97, "reason": "Based on your interest in cameras" }
+    }
+  },
+
+  "logs": {
+    "GET /logs": {
+      "query_params": { "action": "created", "entity_type": "Product", "entity_id": 1, "status": "success", "page": 1 },
+      "response": {
+        "data": [
+          { "id": 1001, "action": "login",   "entity_type": "User",    "entity_id": 1, "user_id": 1, "user": { "name": "Ahmed Mohamed" }, "status": "success", "ip_address": "196.220.1.1", "old_values": null, "new_values": null, "created_at": "2025-03-08T10:00:00.000000Z" },
+          { "id": 1002, "action": "created", "entity_type": "Order",   "entity_id": 103, "user_id": 1, "user": { "name": "Ahmed Mohamed" }, "status": "success", "ip_address": "196.220.1.1", "old_values": null, "new_values": { "status": "pending", "total": 2050 }, "created_at": "2025-03-08T11:00:00.000000Z" },
+          { "id": 1003, "action": "updated", "entity_type": "Order",   "entity_id": 101, "user_id": 3, "user": { "name": "Omar Hassan" }, "status": "success", "ip_address": "196.220.2.5", "old_values": { "status": "processing" }, "new_values": { "status": "completed" }, "created_at": "2025-01-22T16:00:00.000000Z" },
+          { "id": 1004, "action": "created", "entity_type": "Product", "entity_id": 12, "user_id": 5, "user": { "name": "Karim Farouk" }, "status": "success", "ip_address": "197.35.10.8", "old_values": null, "new_values": { "name": "Vintage Ottoman Sofa Set", "price": 18000 }, "created_at": "2025-03-07T14:01:00.000000Z" },
+          { "id": 1005, "action": "deleted", "entity_type": "Review",  "entity_id": 5, "user_id": 3, "user": { "name": "Omar Hassan" }, "status": "success", "ip_address": "196.220.2.5", "old_values": { "rating": 1, "comment": "Spam review" }, "new_values": null, "created_at": "2025-03-06T09:30:00.000000Z" },
+          { "id": 1006, "action": "login",   "entity_type": "User",    "entity_id": 99, "user_id": null, "user": null, "status": "failed", "ip_address": "41.250.3.200", "old_values": null, "new_values": { "email": "hacker@bad.com" }, "created_at": "2025-03-07T02:14:00.000000Z" },
+          { "id": 1007, "action": "updated", "entity_type": "User",    "entity_id": 4, "user_id": 3, "user": { "name": "Omar Hassan" }, "status": "success", "ip_address": "196.220.2.5", "old_values": { "role": "user" }, "new_values": { "role": "seller" }, "created_at": "2025-03-08T09:00:00.000000Z" },
+          { "id": 1008, "action": "created", "entity_type": "Payment", "entity_id": 303, "user_id": 1, "user": { "name": "Ahmed Mohamed" }, "status": "success", "ip_address": "196.220.1.1", "old_values": null, "new_values": { "amount": 2050, "method": "vodafone_cash", "status": "paid" }, "created_at": "2025-03-08T11:10:00.000000Z" }
+        ],
+        "current_page": 1,
+        "last_page": 3,
+        "per_page": 20,
+        "total": 58
+      }
+    }
+  },
+
+  "notifications": {
+    "GET /notifications": {
+      "response": {
+        "data": [
+          { "id": "uuid-001", "type": "order",   "read_at": null,                       "data": { "title": "Order Confirmed!", "message": "Your order #103 has been placed and is being processed.", "url": "/orders/103" }, "created_at": "2025-03-08T11:05:00.000000Z" },
+          { "id": "uuid-002", "type": "payment", "read_at": "2025-03-08T12:00:00.000000Z", "data": { "title": "Payment Received", "message": "Payment of EGP 2,050 confirmed via Vodafone Cash.", "url": "/payments" }, "created_at": "2025-03-08T11:10:00.000000Z" },
+          { "id": "uuid-003", "type": "rental",  "read_at": null,                       "data": { "title": "Rental Due Tomorrow!", "message": "Your rental of PlayStation 5 is due on March 12, 2025.", "url": "/rentals" }, "created_at": "2025-03-11T09:00:00.000000Z" },
+          { "id": "uuid-004", "type": "review",  "read_at": null,                       "data": { "title": "New Review on Your Product", "message": "Ahmed Mohamed left a 5-star review on iPhone 14 Pro Max.", "url": "/products/1" }, "created_at": "2025-01-25T14:05:00.000000Z" },
+          { "id": "uuid-005", "type": "system",  "read_at": "2025-01-16T09:00:00.000000Z", "data": { "title": "Welcome to Tasleem!", "message": "Your account is ready. Start buying, selling, and renting today.", "url": "/" }, "created_at": "2025-01-15T10:05:00.000000Z" }
+        ],
+        "unread_count": 3
+      }
+    },
+    "PUT /notifications/{id}/read": {
+      "response": { "message": "Notification marked as read.", "id": "uuid-001", "read_at": "2025-03-08T13:00:00.000000Z" }
+    },
+    "PUT /notifications/read-all": {
+      "response": { "message": "All notifications marked as read.", "updated": 3 }
+    },
+    "GET /notifications/unread-count": {
+      "response": { "unread_count": 3 }
+    }
+  },
+
+  "error_responses": {
+    "401 Unauthenticated": { "message": "Unauthenticated." },
+    "403 Forbidden":       { "message": "You do not have permission to perform this action." },
+    "404 Not Found":       { "message": "Resource not found." },
+    "422 Validation Error": {
+      "message": "The given data was invalid.",
+      "errors": {
+        "email":    ["The email field is required.", "The email must be a valid email address."],
+        "password": ["The password must be at least 8 characters."],
+        "price":    ["The price must be greater than 0."]
+      }
+    },
+    "500 Server Error": { "message": "Server Error. Please try again later." }
+  }
+}
