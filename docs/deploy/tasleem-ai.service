@@ -1,0 +1,26 @@
+[Unit]
+Description=Tasleem AI Service (Gunicorn + Uvicorn workers, 127.0.0.1:8080)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/tasleem/ai-service
+Environment="PATH=/opt/tasleem/ai-service/venv/bin"
+ExecStart=/opt/tasleem/ai-service/venv/bin/gunicorn \
+    --workers 2 \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --bind 127.0.0.1:8080 \
+    --timeout 120 \
+    --access-logfile - \
+    --error-logfile - \
+    main:app
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tasleem-ai
+
+[Install]
+WantedBy=multi-user.target

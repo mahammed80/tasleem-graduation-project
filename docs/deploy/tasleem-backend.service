@@ -1,0 +1,19 @@
+[Unit]
+Description=Tasleem Laravel API (artisan serve, 127.0.0.1:8000)
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/tasleem/backend
+Environment=APP_ENV=production
+ExecStart=/usr/bin/php artisan serve --host=127.0.0.1 --port=8000
+Restart=always
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=tasleem-backend
+
+[Install]
+WantedBy=multi-user.target

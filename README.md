@@ -53,8 +53,44 @@ heavy ML calls to the AI service.
 
 ## Deployment
 
-See `docs/DEPLOY.md` (created alongside VPS setup) for the production stack:
-nginx + PHP-FPM + Gunicorn/Uvicorn behind a single reverse proxy on the VPS.
+See **[`docs/DEPLOY.md`](docs/DEPLOY.md)** for the full step-by-step guide.
+
+Short version (Ubuntu 22.04/24.04, single VPS, no Docker):
+
+```bash
+# One-time, on the VPS
+sudo apt install -y nginx php8.2 php8.2-cli php8.2-fpm php8.2-mbstring \
+  php8.2-xml php8.2-curl php8.2-zip php8.2-bcmath php8.2-sqlite3 \
+  php8.2-intl php8.2-tokenizer composer nodejs python3.11 python3.venv build-essential
+
+cd /opt && sudo git clone https://github.com/mahammed80/tasleem-graduation-project.git tasleem
+cd tasleem
+
+# Backend (SQLite)
+cd backend && cp .env.example .env && sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/' .env
+touch database/database.sqlite
+composer install --no-dev --optimize-autoloader
+php artisan key:generate && php artisan storage:link && php artisan migrate --force
+sudo cp ../docs/deploy/tasleem-backend.service /etc/systemd/system/
+sudo systemctl enable --now tasleem-backend
+
+# AI service
+cd ../ai-service && python3.11 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt && deactivate
+sudo cp ../docs/deploy/tasleem-ai.service /etc/systemd/system/
+sudo systemctl enable --now tasleem-ai
+
+# Frontend (build, then nginx serves the dist/)
+cd ../frontend && npm ci && npm run build
+
+# Nginx
+sudo cp ../docs/deploy/tasleem-nginx.conf /etc/nginx/sites-available/tasleem
+sudo ln -sf /etc/nginx/sites-available/tasleem /etc/nginx/sites-enabled/tasleem
+sudo rm -f /etc/nginx/sites-enabled/default && sudo nginx -t && sudo systemctl reload nginx
+```
+
+After that the site is at `http://YOUR_VPS_IP/`, the API at `/api/v1`, and the AI
+service at `/ai/health`.
 
 ## License
 
